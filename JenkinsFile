@@ -1,0 +1,23 @@
+pipeline {     
+    agent any      
+    tools {
+        maven 'mvn'     
+    }      
+    stages {         
+        stage('Cloning the code') {             
+            steps {                 
+                echo "Cloning the code"                 
+                git branch: 'main',                      
+                url: 'https://github.com/sabihazshaikh/Automation_Project-QA_Automation_Labs.git'             
+            }         
+        }          
+        stage('Test the code') {             
+            steps {                 
+                echo "Testing the code"                 
+                dir('QA_Automation_Labs') {
+            bat 'mvn clean test -Dmaven.test.failure.ignore=true'             
+            }         
+        }     
+    }
+}
+}
